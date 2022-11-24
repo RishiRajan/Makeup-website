@@ -262,12 +262,15 @@ let url = "https://makeup-api.herokuapp.com/api/v1/products.json";
 let productsdup ={}; //duplicate product to refer outside fetch
 let currentProdList =[]; //current items list after filtering by category and name
 
+let resstatus = '';
 let fetchItems = async (url) =>{
     const response = await fetch(url);
     if(response.ok){
         return response.json();
     }else{
-        return response.status;
+         console.log(response.status);
+         resstatus  = response.status;
+         throw new Error(`Error! status: ${response.status}`);
     }   
 }
 
@@ -282,6 +285,8 @@ fetchItems(url)
 
     }).catch((error) => {
         console.log(error);
+        window.addEventListener("load",alert(`Makeup API responded with: 503`));
+        
     });
 
 
