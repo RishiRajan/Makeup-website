@@ -27,13 +27,13 @@ ElementCreator("navFluidDiv","div","container-fluid","navFluidDiv","nav"); //nav
     //--------------------------- Search Bar on navigator ------------------------------
 
     let navSearch = ElementCreator("searchbar","form","d-flex","search","navFluidDiv");
-
-    //- Input field for text
-    ElementCreator("inputSearch","input","form-control me-2","inputSearch","search");
     document.getElementById("search").onsubmit = function(event){
             collectFormData();
             event.preventDefault();
         };
+
+    //- Input field for text
+    ElementCreator("inputSearch","input","form-control me-2","inputSearch","search");
     inputSearch.type ="text";
     inputSearch.placeholder="Search";
     inputSearch.style.borderRadius = 0;
@@ -52,7 +52,8 @@ ElementCreator("navFluidDiv","div","container-fluid","navFluidDiv","nav"); //nav
 //---------------------- Filter by category images --------------------------------
 
 ElementCreator("filterdiv","div"," container-fluid","filterdiv");
-        
+
+filterdiv.style.marginTop="1%";
 
 ElementCreator("filterCategory","form","filterCategory","filterCategory","filterdiv")
 
