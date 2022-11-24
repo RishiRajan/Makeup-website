@@ -286,7 +286,7 @@ fetchItems(url)
     }).catch((error) => {
         console.log(error);
         window.location = 'https://makeup-api.herokuapp.com/api/v1/products.json';
-        window.addEventListener("load",alert(`Makeup API responded with: 503 please try again afer some time or click ok to visit api site`));
+        window.addEventListener("load",alert(`Makeup API refused to connect please try again afer some time or click ok to visit api site`));
         
     });
 
