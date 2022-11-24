@@ -30,6 +30,10 @@ ElementCreator("navFluidDiv","div","container-fluid","navFluidDiv","nav"); //nav
 
     //- Input field for text
     ElementCreator("inputSearch","input","form-control me-2","inputSearch","search");
+    document.getElementById("search").onsubmit = function(event){
+            collectFormData();
+            event.preventDefault();
+        };
     inputSearch.type ="text";
     inputSearch.placeholder="Search";
     inputSearch.style.borderRadius = 0;
@@ -48,7 +52,7 @@ ElementCreator("navFluidDiv","div","container-fluid","navFluidDiv","nav"); //nav
 //---------------------- Filter by category images --------------------------------
 
 ElementCreator("filterdiv","div"," container-fluid","filterdiv");
-filterdiv.style.marginTop="1%";
+        
 
 ElementCreator("filterCategory","form","filterCategory","filterCategory","filterdiv")
 
@@ -254,8 +258,8 @@ let buildProducts = (products) =>{
 //---------------------- Request for data ---------------------------------
 let url = "https://makeup-api.herokuapp.com/api/v1/products.json";
 
-let productsdup ={};
-let currentProdList =[];
+let productsdup ={}; //duplicate product to refer outside fetch
+let currentProdList =[]; //current items list after filtering by category and name
 
 let fetchItems = async (url) =>{
     const response = await fetch(url);
@@ -266,6 +270,7 @@ let fetchItems = async (url) =>{
     }   
 }
 
+// Main fetch 
 fetchItems(url)
     .then(products =>{
         //  console.log(JSON.stringify(products[0]),JSON.stringify(products[1]));
@@ -274,13 +279,16 @@ fetchItems(url)
         buildProducts(products);
         productsdup = products;
 
-    })
+    }).catch((error) => {
+        console.log(error);
+    });
+
 
 
 // --------------------- Form submit functions ------------------------------
 
 
-let imageFilter =(clickedid)=>{
+let imageFilter =(clickedid)=>{   //triggered by  product type image filter
     // console.log(clickedid);
     categorySelected = clickedid;
     findProducts(categorySelected);
@@ -288,7 +296,7 @@ let imageFilter =(clickedid)=>{
 
 }
 
-let collectFormData = () =>{
+let collectFormData = () =>{     //triggerd by search box search icon
     //Value of input box
     var imputbox = document.getElementById('inputSearch');
     // console.log(imputbox.value);
